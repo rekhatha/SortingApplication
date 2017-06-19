@@ -1,0 +1,77 @@
+<div ng-app="frontend" ng-controller="sortController">
+<form class="form-horizontal"  name="sortForm" id = "sortForm" novalidate>
+	<div class="modal-body">
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-8 ">
+				<div class="form-group">
+					<label for="sortInput" class="col-md-5 control-label">Enter the numbers to sort</label>
+					<div class="col-md-6">
+						<input type="text" name="Sort Numbers" class="form-control"
+                                                          ng-model="sortNumbers" ng-required="true"
+                                                          ng-maxlength="250"
+                                                          ng-pattern="/^[0-9,]+$/">
+                         <div ng-show="sortForm.sortNumbers.$touched && sortForm.$invalid && sortForm.input.$error.required">
+                         Please enter numbers for sorting.</div>
+					    <div class="error-msg" ng-show="sortForm.input.$error.pattern">
+					      Not valid number!</div>                          
+					</div>
+					
+				</div>
+				
+				<div class="form-group" ng-if ="result == true">
+				<label for="sortResult" class="col-md-5 control-label">Sorted Array is:</label>
+   					<div class = "col-md-6">
+   					<input type="text" name="Sort Result" class="form-control" value ="{{resultArray.toString()}}">
+					</div>
+					</div>
+					
+				<div class="form-group" ng-if ="result == true">
+				<label for="sortResult" class="col-md-5 control-label">Frequency Of Position changes:</label>
+   					<div class = "col-md-6">
+   					<ul class="form-control positionchange">
+    					<ol ng-repeat='(key, value) in elementPostions'>
+       						 <span>Element: {{key}}, Position Changes: {{value}}</span>
+   						 </ol>
+					</ul>
+   					
+					</div>
+					</div>	
+
+				
+				<div class="form-group"  ng-if ="result == true">
+				<label for="time" class="col-md-5 control-label">Time Consumed is:</label>
+   					<div class = "col-md-6">
+                     
+                    <input type="text" name="time" class="form-control" value="{{timeConsumed}}">
+ 					
+					</div>
+					</div>
+					
+					<div class="form-group"  ng-if ="result == true">
+				<label for="time" class="col-md-5 control-label">Previous Sorted Array is:</label>
+   					<div class = "col-md-6" ng-show = "previousValues.length != 0">
+                     
+                    <input type="text" name="time" class="form-control" value="{{previousValues}}">
+ 					
+					</div>
+					<div class = "col-md-6" ng-show= "previousValues.length == 0">
+                     
+                    <p>No Previous values</p>
+ 					
+					</div>
+					</div>
+
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-primary" ng-disabled="sortForm.$invalid" ng-click="sortNumber()">
+			<span class="glyphicon"></span> Ascending Sort
+		</button>
+		<button type="button" class="btn btn-default" ng-click="reset()">Reset</button>
+	</div>
+	
+</form>
+</div>
